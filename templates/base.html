@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            background-color: rgb(29, 96, 190);
+            padding: 1vh;
+        }
+
+        header>div {
+            text-align: center;
+            color: white;
+        }
+
+        nav {
+            background-color: rgb(29, 96, 190);
+            width: 200px;
+            position: fixed;
+            height: 100%;
+        }
+
+        .menu {
+            margin-top: 10vh;
+        }
+
+        .menu li {
+            list-style: none;
+        }
+
+        .menu li a {
+            height: 30px;
+            line-height: 50px;
+            /* display: block; */
+            padding: 0 10px;
+            font-size: 15px;
+            text-decoration: none;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>HUFS TEST PREP CENTER</div>
+    </header>
+
+    <nav>
+        <ul class="menu">
+            <li><a href="/home/">Home</a></li>
+            <li><a href="/student/">Student</a></li>
+            <li><a href="/mocktestanalyze/">Mock test analyze</a></li>
+            <li><a href="/teacher/">Teacher</a></li>
+            <li><a href="/timetable/">Timetable</a></li>
+            <li><a href="/counseling/">Counseling</a></li>
+            <li><a href="/visit/">Visit</a></li>
+            <li><a href="/leave/">Leave</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    </main>
+
+</body>
+
+</html>
