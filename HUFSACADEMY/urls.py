@@ -12,4 +12,6 @@ urlpatterns = [
     path('counseling/', views.counseling, name='counseling'),
     path('visit/', views.visit, name='visit'),
     path('leave/', views.leave, name='leave'),
+    path('mocktest_search/', views.mocktest_search, name='mocktest_search'),
+    path('mocktest_search/recommend.html', views.recommend, name='recommend'),
 ]
