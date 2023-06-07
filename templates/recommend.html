@@ -1,10 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Recommendation</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+    <h1>Recommendation</h1>
+    <div id="recommendation-container">
+        <!-- Content will be dynamically updated here -->
+    </div>
 
+    <script>
+        // Retrieve the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentNumber = urlParams.get('student_number');
+        const date = urlParams.get('date');
+    </script>
+    {% if student_data_list %}
+        <h2>Search Results:</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>Student Number</th>
+                <th>Mock Kor</th>
+                <th>Mock Math</th>
+                <th>Mock Eng</th>
+                <th>Mock Extraclass 1</th>
+                <th>Mock Extraclass 2</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student_data in student_data_list %}
+                <tr>
+                    <td>{{ student_data.student_stu_num }}</td>
+                    <td>{{ student_data.mock_kor }}</td>
+                    <td>{{ student_data.mock_math }}</td>
+                    <td>{{ student_data.mock_eng }}</td>
+                    <td>{{ student_data.mock_extraclass_1 }}</td>
+                    <td>{{ student_data.mock_extraclass_2 }}</td>
+                    <td>{{ student_data.date }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <h2>Differences between class average</h2>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th>Mock Kor Difference</th>
+                <th>Mock Math Difference</th>
+                <th>Mock Eng Difference</th>
+                <th>Mock Extraclass 1 Difference</th>
+                <th>Mock Extraclass 2 Difference</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for diff in difference %}
+                <tr>
+                    <td>{{ diff.mock_kor|floatformat:1 }}</td>
+                    <td>{{ diff.mock_math|floatformat:1 }}</td>
+                    <td>{{ diff.mock_eng|floatformat:1 }}</td>
+                    <td>{{ diff.mock_extraclass_1|floatformat:1 }}</td>
+                    <td>{{ diff.mock_extraclass_2|floatformat:1 }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No data found.</p>
+    {% endif %}
 </body>
 </html>

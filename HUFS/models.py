@@ -96,7 +96,7 @@ class Student(models.Model):
                                          db_column='CLASS_CLASS_TYPE')
 
     def __str__(self):
-        return f"{self.stu_num} {self.stu_name}"
+        return f"{self.stu_num}"
 
     # Field name made lowercase.
 

@@ -85,7 +85,8 @@
             </tbody>
 
         </table>
-        <a href="recommend.html" class="btn btn-primary">Go to Recommendation</a>
+        <a href="recommend.html?student_number={{ student_data_list.0.student_stu_num }}&date={{ student_data_list.0.date }}"
+           class="btn btn-primary">Go to Recommendation</a>
     {% else %}
         <p>No data found.</p>
     {% endif %}
@@ -93,7 +94,7 @@
 <script>
     function validateForm() {
         var studentNumber = document.getElementById("student_number").value;
-        if (studentNumber < 1 || studentNumber > 170) {
+        if (studentNumber < 1 || studentNumber > 180) {
             alert("Student number is not in range");
             return false;
         }
