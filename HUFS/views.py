@@ -103,6 +103,7 @@ def recommend(request):
 
     stud = Student.objects.get(stu_num=student_number)
     class_type = stud.class_class_type.class_type
+    selectedname=stud[0]
 
     selectedstu = MockTest.objects.filter(student_stu_num=stud, date=date)
     selectedmock = MockTest.objects.filter(student_stu_num=stud, date=date)
@@ -141,6 +142,7 @@ def recommend(request):
         'student_data_list': selectedstu,
         'selectedmock_values': selectedmock_values,
         'difference': difference,
+        'name':selectedname
     }
 
     return render(request, 'recommend.html', context)
