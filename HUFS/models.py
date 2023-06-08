@@ -169,10 +169,8 @@ class recommendclass(models.Model):
     rec_class = models.CharField(db_column='rec_class', max_length=20)# Field name made lowercase.
     rec_pro = models.CharField(db_column='rec_pro', max_length=20)  # Field name made lowercase.
     rec_price = models.PositiveIntegerField(db_column='price per hour')  # Field name made lowercase.
-    rec_weightpl = models.DecimalField(db_column='rec_weightpl', max_digits=5,
-                                       decimal_places=2)  # Field name made lowercase.
-    rec_weightmi = models.DecimalField(db_column='rec_weightmi', max_digits=5,
-                                       decimal_places=2)  # Field name made lowercase.
+    rec_weightpl = models.FloatField(db_column='rec_weightpl')  # Field name made lowercase.
+    rec_weightmi = models.FloatField(db_column='rec_weightmi')  # Field name made lowercase.
 
     class Meta:
         managed = True
