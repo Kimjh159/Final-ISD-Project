@@ -5,16 +5,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Recommendation</h1>
 <div id="recommendation-container">
-    <h2>Recommendation Table</h2>
+    {% if student_data_list %}
+        <h2>Search Results: {{ name }}</h2>
+    {% else %}
+        <p>No data found.</p>
+    {% endif %}
+    <h2>Recommend Program</h2>
     <table class="table">
         <thead class="thead-light">
         <tr>
             <th>Class</th>
             <th>Subject</th>
             <th>Price</th>
-            <th>Total Price</th>
         </tr>
         </thead>
         <tbody>
@@ -22,36 +25,36 @@
             <tr>
                 <td>Korean</td>
                 <td>{{ rec_kor_pro.0 }}</td>
-                <td>{{ rec_kor_cost.0 }}</td>
-                <td>{{ rec_kor_totalprice }}</td>
+                <td>{{ rec_kor_totalprice|floatformat:0 }}</td>
             </tr>
         {% endif %}
         {% if rec_math_pro %}
             <tr>
                 <td>Math</td>
                 <td>{{ rec_math_pro.0 }}</td>
-                <td>{{ rec_math_cost.0 }}</td>
-                <td>{{ rec_math_totalprice }}</td>
+                <td>{{ rec_math_totalprice|floatformat:0 }}</td>
             </tr>
         {% endif %}
         {% if rec_eng_pro %}
             <tr>
                 <td>English</td>
                 <td>{{ rec_eng_pro.0 }}</td>
-                <td>{{ rec_eng_cost.0 }}</td>
-                <td>{{ rec_eng_totalprice }}</td>
+                <td>{{ rec_eng_totalprice|floatformat:0 }}</td>
             </tr>
         {% endif %}
         {% if rec_ex_pro %}
             <tr>
                 <td>Extraclass</td>
                 <td>{{ rec_ex_pro.0 }}</td>
-                <td>{{ rec_ex_cost.0 }}</td>
-                <td>{{ rec_ex_totalprice }}</td>
+                <td>{{ rec_ex_totalprice|floatformat:0 }}</td>
             </tr>
         {% endif %}
         </tbody>
     </table>
+
+    <h2>Total Price</h2>
+    <p>{{ rec_totalprice|floatformat:0  }}</p>
+
 </div>
 
 <script>
@@ -60,17 +63,6 @@
     const studentNumber = urlParams.get('student_number');
     const date = urlParams.get('date');
 </script>
-{% if student_data_list %}
-    <h2>Search Results: {{ name }}</h2>
-    <table class="table">
-        <!-- Existing student data table code -->
-    </table>
-    <h2>Differences between the class average</h2>
-    <table class="table">
-        <!-- Existing differences table code -->
-    </table>
-{% else %}
-    <p>No data found.</p>
-{% endif %}
+
 </body>
 </html>

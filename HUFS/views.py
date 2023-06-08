@@ -161,39 +161,45 @@ def recommend(request):
     rec_kor_pro = rec_kor.values_list('rec_pro', flat=True)
     rec_kor_cost = rec_kor.values_list('rec_price', flat=True)
     rec_kor_weight = rec_kor.values_list('rec_weightpl', flat=True)[0] if signs[
-                                                                           'mock_kor'] == 'positive' else rec_kor.values_list(
+                                                                              'mock_kor'] == 'positive' else \
+    rec_kor.values_list(
         'rec_weightmi', flat=True)[0]
     rec_kor_weight = float(rec_kor_weight)
-    rec_kor_totalprice = (rec_kor_cost[0] * rec_kor_weight * abs(diff['mock_kor'])) // 10000* 10000
-
+    rec_kor_adj = 0 if selectedmock_values[0]['mock_kor'] >= 92 else 2
+    rec_kor_totalprice = (rec_kor_cost[0] * rec_kor_weight * abs(diff['mock_kor'] * rec_kor_adj)) // 10000 * 10000
 
     rec_math_pro = rec_math.values_list('rec_pro', flat=True)
     rec_math_cost = rec_math.values_list('rec_price', flat=True)
     rec_math_weight = rec_math.values_list('rec_weightpl', flat=True)[0] if signs[
-                                                                             'mock_math'] == 'positive' else rec_math.values_list(
+                                                                                'mock_math'] == 'positive' else \
+    rec_math.values_list(
         'rec_weightmi', flat=True)[0]
     rec_math_weight = float(rec_math_weight)
-    rec_math_totalprice = (rec_math_cost[0] * rec_math_weight * abs(diff['mock_math'])) // 10000 * 10000
-
-
+    rec_math_adj = 0 if selectedmock_values[0]['mock_math'] >= 92 else 2
+    rec_math_totalprice = (rec_math_cost[0] * rec_math_weight * abs(diff['mock_math']) * rec_math_adj) // 10000 * 10000
 
     rec_eng_pro = rec_eng.values_list('rec_pro', flat=True)
     rec_eng_cost = rec_eng.values_list('rec_price', flat=True)
     rec_eng_weight = rec_eng.values_list('rec_weightpl', flat=True)[0] if signs[
-                                                                           'mock_eng'] == 'positive' else rec_eng.values_list(
+                                                                              'mock_eng'] == 'positive' else \
+    rec_eng.values_list(
         'rec_weightmi', flat=True)[0]
     rec_eng_weight = float(rec_eng_weight)
-    rec_eng_totalprice = (rec_eng_cost[0] * rec_eng_weight * abs(diff['mock_eng'])) // 10000 * 10000
+    rec_eng_adj = 0 if selectedmock_values[0]['mock_eng'] >= 90 else 2
+    rec_eng_totalprice = (rec_eng_cost[0] * rec_eng_weight * abs(diff['mock_eng']) * rec_eng_adj) // 10000 * 10000
 
     rec_ex_pro = rec_ex.values_list('rec_pro', flat=True)
     rec_ex_cost = rec_ex.values_list('rec_price', flat=True)
     rec_ex_weight = rec_ex.values_list('rec_weightpl', flat=True)[0] if signs[
-                                                                         'mock_extraclass_1'] == 'positive' else rec_ex.values_list(
+                                                                            'mock_extraclass_1'] == 'positive' else \
+    rec_ex.values_list(
         'rec_weightmi', flat=True)[0]
     rec_ex_weight = float(rec_ex_weight)
-    rec_ex_totalprice = (rec_ex_cost[0] * rec_ex_weight * abs(diff['mock_extraclass_1'])) // 10000 * 10000
+    rec_eng_adj = 0 if (selectedmock_values[0]['mock_extraclass_1'] + selectedmock_values[0][
+        'mock_extraclass_2']) / 2 >= 90 else 2
+    rec_ex_totalprice = (rec_ex_cost[0] * rec_ex_weight * abs(diff['mock_extraclass_1'])*rec_eng_adj) // 10000 * 10000
 
-
+    rec_totalprice = rec_kor_totalprice+rec_math_totalprice+rec_eng_totalprice+rec_ex_totalprice
     context = {
         'student_data_list': selectedstu,
         'selectedmock_values': selectedmock_values,
@@ -207,6 +213,7 @@ def recommend(request):
         'rec_eng_totalprice': rec_eng_totalprice,
         'rec_ex_pro': rec_ex_pro,
         'rec_ex_totalprice': rec_ex_totalprice,
+        'rec_totalprice': rec_totalprice,
 
     }
 
