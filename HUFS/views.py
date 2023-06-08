@@ -1,4 +1,5 @@
 # Create your views here.
+import requests
 from django.shortcuts import render
 from django.db.models import Avg
 from django.db.models import Max
@@ -7,7 +8,6 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from datetime import datetime
 from django.views.generic import TemplateView
-import requests
 
 class CustomLoginView(LoginView):
     template_name = 'login.html'
@@ -35,7 +35,7 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         current_date = datetime.now()
-        current_weather, current_temperature = get_current_weather()  # 외부 날씨 API를 사용하여 현재 날씨 정보 가져오기
+        current_weather, current_temperature = get_current_weather()
         context['current_date'] = current_date
         context['current_weather'] = current_weather
         context['current_temperature'] = current_temperature

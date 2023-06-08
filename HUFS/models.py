@@ -2,14 +2,14 @@ from django.db import models
 
 
 class Administrator(models.Model):
-    admin_num = models.PositiveIntegerField(db_column='ADMIN_NUM', primary_key=True)  # Field name made lowercase.
-    admin_name = models.CharField(db_column='ADMIN_NAME', max_length=4)  # Field name made lowercase.
+    admin_num = models.PositiveIntegerField(db_column='ADMIN_NUM', primary_key=True)
+    admin_name = models.CharField(db_column='ADMIN_NAME', max_length=4)
     admin_age = models.PositiveIntegerField(db_column='ADMIN_AGE')
 
     def __str__(self):
         return self.admin_name
 
-    # Field name made lowercase.
+
 
     class Meta:
         managed = True
@@ -17,14 +17,14 @@ class Administrator(models.Model):
 
 
 class Class(models.Model):
-    class_type = models.CharField(db_column='CLASS_TYPE', primary_key=True, max_length=2)  # Field name made lowercase.
+    class_type = models.CharField(db_column='CLASS_TYPE', primary_key=True, max_length=2)
     administrator_admin_num = models.ForeignKey(Administrator, models.DO_NOTHING,
                                                 db_column='ADMINISTRATOR_ADMIN_NUM')
 
     def __str__(self):
         return self.class_type
 
-    # Field name made lowercase.
+
 
     class Meta:
         managed = True
@@ -32,10 +32,10 @@ class Class(models.Model):
 
 
 class Counseling(models.Model):
-    cou_num = models.PositiveIntegerField(db_column='COU_NUM', primary_key=True)  # Field name made lowercase.
-    cou_date = models.DateField(db_column='COU_DATE')  # Field name made lowercase.
+    cou_num = models.PositiveIntegerField(db_column='COU_NUM', primary_key=True)
+    cou_date = models.DateField(db_column='COU_DATE')
     administrator_admin_num = models.ForeignKey(Administrator, models.DO_NOTHING,
-                                                db_column='ADMINISTRATOR_ADMIN_NUM')  # Field name made lowercase.
+                                                db_column='ADMINISTRATOR_ADMIN_NUM')
     student_stu_num = models.ForeignKey('Student', models.DO_NOTHING,
                                         db_column='STUDENT_STU_NUM')
 
@@ -49,14 +49,14 @@ class Counseling(models.Model):
 
 class MockTest(models.Model):
     mock_id = models.PositiveIntegerField(db_column='MOCK_ID', primary_key=True)
-    mock_kor = models.PositiveIntegerField(db_column='MOCK_KOR')  # Field name made lowercase.
-    mock_math = models.PositiveIntegerField(db_column='MOCK_MATH')  # Field name made lowercase.
-    mock_eng = models.PositiveIntegerField(db_column='MOCK_ENG')  # Field name made lowercase.
-    mock_extraclass_1 = models.PositiveIntegerField(db_column='MOCK_EXTRACLASS_1')  # Field name made lowercase.
-    mock_extraclass_2 = models.PositiveIntegerField(db_column='MOCK_EXTRACLASS_2')  # Field name made lowercase.
+    mock_kor = models.PositiveIntegerField(db_column='MOCK_KOR')
+    mock_math = models.PositiveIntegerField(db_column='MOCK_MATH')
+    mock_eng = models.PositiveIntegerField(db_column='MOCK_ENG')
+    mock_extraclass_1 = models.PositiveIntegerField(db_column='MOCK_EXTRACLASS_1')
+    mock_extraclass_2 = models.PositiveIntegerField(db_column='MOCK_EXTRACLASS_2')
     date = models.TextField()
     student_stu_num = models.ForeignKey('Student', models.DO_NOTHING,
-                                        db_column='STUDENT_STU_NUM')  # Field name made lowercase.
+                                        db_column='STUDENT_STU_NUM')
 
     def __str__(self):
         return f"{self.student_stu_num}{self.date}"
@@ -67,9 +67,9 @@ class MockTest(models.Model):
 
 
 class Room(models.Model):
-    room_num = models.PositiveIntegerField(db_column='ROOM_NUM', primary_key=True)  # Field name made lowercase.
+    room_num = models.PositiveIntegerField(db_column='ROOM_NUM', primary_key=True)
     administrator_admin_num = models.ForeignKey(Administrator, models.DO_NOTHING,
-                                                db_column='ADMINISTRATOR_ADMIN_NUM')  # Field name made lowercase.
+                                                db_column='ADMINISTRATOR_ADMIN_NUM')
 
     def __str__(self):
         return f" {self.room_num}"
@@ -80,26 +80,26 @@ class Room(models.Model):
 
 
 class Student(models.Model):
-    stu_num = models.PositiveIntegerField(db_column='STU_NUM', primary_key=True)  # Field name made lowercase.
-    stu_name = models.CharField(db_column='STU_NAME', max_length=4)  # Field name made lowercase.
-    stu_age = models.PositiveIntegerField(db_column='STU_AGE')  # Field name made lowercase.
-    stu_sex = models.CharField(db_column='STU_SEX', max_length=1)  # Field name made lowercase.
-    stu_birth = models.DateField(db_column='STU_BIRTH')  # Field name made lowercase.
-    stu_curriculum = models.CharField(db_column='STU_CURRICULUM', max_length=1)  # Field name made lowercase.
-    stu_extraclass_1 = models.CharField(db_column='STU_EXTRACLASS_1', max_length=2)  # Field name made lowercase.
-    stu_extraclass_2 = models.CharField(db_column='STU_EXTRACLASS_2', max_length=2)  # Field name made lowercase.
+    stu_num = models.PositiveIntegerField(db_column='STU_NUM', primary_key=True)
+    stu_name = models.CharField(db_column='STU_NAME', max_length=4)
+    stu_age = models.PositiveIntegerField(db_column='STU_AGE')
+    stu_sex = models.CharField(db_column='STU_SEX', max_length=1)
+    stu_birth = models.DateField(db_column='STU_BIRTH')
+    stu_curriculum = models.CharField(db_column='STU_CURRICULUM', max_length=1)
+    stu_extraclass_1 = models.CharField(db_column='STU_EXTRACLASS_1', max_length=2)
+    stu_extraclass_2 = models.CharField(db_column='STU_EXTRACLASS_2', max_length=2)
     stu_formerexam = models.DecimalField(db_column='STU_FORMEREXAM', max_digits=3,
-                                         decimal_places=2)  # Field name made lowercase.
-    stu_leave_date = models.DateField(db_column='STU_LEAVE_DATE')  # Field name made lowercase.
-    stu_leave_reason = models.CharField(db_column='STU_LEAVE_REASON', max_length=100)  # Field name made lowercase.
-    room_room_num = models.ForeignKey(Room, models.DO_NOTHING, db_column='ROOM_ROOM_NUM')  # Field name made lowercase.
+                                         decimal_places=2)
+    stu_leave_date = models.DateField(db_column='STU_LEAVE_DATE')
+    stu_leave_reason = models.CharField(db_column='STU_LEAVE_REASON', max_length=100)
+    room_room_num = models.ForeignKey(Room, models.DO_NOTHING, db_column='ROOM_ROOM_NUM')
     class_class_type = models.ForeignKey(Class, models.DO_NOTHING,
                                          db_column='CLASS_CLASS_TYPE')
 
     def __str__(self):
         return f"{self.stu_num}"
 
-    # Field name made lowercase.
+
 
     class Meta:
         managed = True
@@ -107,16 +107,16 @@ class Student(models.Model):
 
 
 class Teacher(models.Model):
-    tea_num = models.PositiveIntegerField(db_column='TEA_NUM', primary_key=True)  # Field name made lowercase.
-    tea_name = models.CharField(db_column='TEA_NAME', max_length=4)  # Field name made lowercase.
-    tea_age = models.PositiveIntegerField(db_column='TEA_AGE')  # Field name made lowercase.
-    tea_sex = models.CharField(db_column='TEA_SEX', max_length=1)  # Field name made lowercase.
+    tea_num = models.PositiveIntegerField(db_column='TEA_NUM', primary_key=True)
+    tea_name = models.CharField(db_column='TEA_NAME', max_length=4)
+    tea_age = models.PositiveIntegerField(db_column='TEA_AGE')
+    tea_sex = models.CharField(db_column='TEA_SEX', max_length=1)
     tea_subject = models.CharField(db_column='TEA_SUBJECT', max_length=2)
 
     def __str__(self):
         return f"{self.tea_subject} {self.tea_name}"
 
-    # Field name made lowercase.
+
 
     class Meta:
         managed = True
@@ -124,19 +124,18 @@ class Teacher(models.Model):
 
 
 class Timetable(models.Model):
-    tita_num = models.PositiveIntegerField(db_column='TITA_NUM', primary_key=True)  # Field name made lowercase.
-    tita_day = models.CharField(db_column='TITA_DAY', max_length=1)  # Field name made lowercase.
-    tita_1c = models.CharField(db_column='TITA_1C', max_length=2)  # Field name made lowercase.
-    tita_2c = models.CharField(db_column='TITA_2C', max_length=2)  # Field name made lowercase.
-    tita_3c = models.CharField(db_column='TITA_3C', max_length=2)  # Field name made lowercase.
-    tita_4c = models.CharField(db_column='TITA_4C', max_length=2)  # Field name made lowercase.
+    tita_num = models.PositiveIntegerField(db_column='TITA_NUM', primary_key=True)
+    tita_day = models.CharField(db_column='TITA_DAY', max_length=1)
+    tita_1c = models.CharField(db_column='TITA_1C', max_length=2)
+    tita_2c = models.CharField(db_column='TITA_2C', max_length=2)
+    tita_3c = models.CharField(db_column='TITA_3C', max_length=2)
+    tita_4c = models.CharField(db_column='TITA_4C', max_length=2)
     class_class_type = models.ForeignKey(Class, models.DO_NOTHING,
                                          db_column='CLASS_CLASS_TYPE')
 
     def __str__(self):
         return f"{self.tita_day} {self.class_class_type.class_type}"
 
-    # Field name made lowercase.
 
     class Meta:
         managed = True
@@ -144,12 +143,12 @@ class Timetable(models.Model):
 
 
 class Visit(models.Model):
-    visit_num = models.PositiveIntegerField(db_column='VISIT_NUM', primary_key=True)  # Field name made lowercase.
-    visit_date = models.DateField(db_column='VISIT_DATE')  # Field name made lowercase.
-    visit_visitor = models.CharField(db_column='VISIT_VISITOR', max_length=4)  # Field name made lowercase.
-    visit_leavehour = models.PositiveIntegerField(db_column='VISIT_LEAVEHOUR')  # Field name made lowercase.
+    visit_num = models.PositiveIntegerField(db_column='VISIT_NUM', primary_key=True)
+    visit_date = models.DateField(db_column='VISIT_DATE')
+    visit_visitor = models.CharField(db_column='VISIT_VISITOR', max_length=4)
+    visit_leavehour = models.PositiveIntegerField(db_column='VISIT_LEAVEHOUR')
     student_stu_num = models.ForeignKey(Student, models.DO_NOTHING,
-                                        db_column='STUDENT_STU_NUM')  # Field name made lowercase.
+                                        db_column='STUDENT_STU_NUM')
     administrator_admin_num = models.ForeignKey(Administrator, models.DO_NOTHING,
                                                 db_column='ADMINISTRATOR_ADMIN_NUM')
 
@@ -164,13 +163,13 @@ class Visit(models.Model):
 
 
 class recommendclass(models.Model):
-    rec_num = models.PositiveIntegerField(db_column='rec_num', primary_key=True)  # Field name made lowercase.
+    rec_num = models.PositiveIntegerField(db_column='rec_num', primary_key=True)
     rec_classtype = models.CharField(db_column='rec_classtype', max_length=10)
-    rec_class = models.CharField(db_column='rec_class', max_length=20)# Field name made lowercase.
-    rec_pro = models.CharField(db_column='rec_pro', max_length=20)  # Field name made lowercase.
-    rec_price = models.PositiveIntegerField(db_column='price per hour')  # Field name made lowercase.
-    rec_weightpl = models.FloatField(db_column='rec_weightpl')  # Field name made lowercase.
-    rec_weightmi = models.FloatField(db_column='rec_weightmi')  # Field name made lowercase.
+    rec_class = models.CharField(db_column='rec_class', max_length=20)
+    rec_pro = models.CharField(db_column='rec_pro', max_length=20)
+    rec_price = models.PositiveIntegerField(db_column='price per hour')
+    rec_weightpl = models.FloatField(db_column='rec_weightpl')
+    rec_weightmi = models.FloatField(db_column='rec_weightmi')
 
     class Meta:
         managed = True

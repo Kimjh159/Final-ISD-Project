@@ -25,40 +25,39 @@
             <tr>
                 <td>Korean</td>
                 <td>{{ rec_kor_pro.0 }}</td>
-                <td>{{ rec_kor_totalprice|floatformat:0 }}</td>
+                <td>{{ rec_kor_totalprice|floatformat:0 }} ₩</td>
             </tr>
         {% endif %}
         {% if rec_math_pro %}
             <tr>
                 <td>Math</td>
                 <td>{{ rec_math_pro.0 }}</td>
-                <td>{{ rec_math_totalprice|floatformat:0 }}</td>
+                <td>{{ rec_math_totalprice|floatformat:0 }} ₩</td>
             </tr>
         {% endif %}
         {% if rec_eng_pro %}
             <tr>
                 <td>English</td>
                 <td>{{ rec_eng_pro.0 }}</td>
-                <td>{{ rec_eng_totalprice|floatformat:0 }}</td>
+                <td>{{ rec_eng_totalprice|floatformat:0 }} ₩</td>
             </tr>
         {% endif %}
         {% if rec_ex_pro %}
             <tr>
                 <td>Extraclass</td>
                 <td>{{ rec_ex_pro.0 }}</td>
-                <td>{{ rec_ex_totalprice|floatformat:0 }}</td>
+                <td>{{ rec_ex_totalprice|floatformat:0 }} ₩</td>
             </tr>
         {% endif %}
         </tbody>
     </table>
 
     <h2>Total Price</h2>
-    <p>{{ rec_totalprice|floatformat:0  }}</p>
+    <p>{{ rec_totalprice|floatformat:0 }} ₩</p>
 <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
 </div>
 
 <script>
-    // Retrieve the URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const studentNumber = urlParams.get('student_number');
     const date = urlParams.get('date');

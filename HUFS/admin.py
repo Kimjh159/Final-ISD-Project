@@ -11,4 +11,3 @@ admin.site.register(Teacher)
 admin.site.register(Counseling)
 admin.site.register(Room)
 admin.site.register(recommendclass)
-# Register your models here.

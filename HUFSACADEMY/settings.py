@@ -37,8 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'HUFS.apps.HufsConfig'
-
+    'HUFS.apps.HufsConfig',
 ]
 
 MIDDLEWARE = [
