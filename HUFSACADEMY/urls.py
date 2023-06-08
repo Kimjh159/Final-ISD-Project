@@ -1,10 +1,12 @@
 from django.urls import path
 from django.contrib import admin
 from HUFS import views
+from HUFS.views import CustomLoginView, HomeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', views.home, name='home'),
+    path('', CustomLoginView.as_view(), name='login'),
+    path('home/', HomeView.as_view(), name='home'),
     path('student/', views.student, name='student'),
     path('mocktestanalyze/', views.mocktestanalyze, name='mocktest_analyze'),
     path('teacher/', views.teacher, name='teacher'),

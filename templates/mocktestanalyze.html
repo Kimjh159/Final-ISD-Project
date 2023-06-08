@@ -87,6 +87,8 @@
         </table>
         <a href="recommend.html?student_number={{ student_data_list.0.student_stu_num }}&date={{ student_data_list.0.date }}"
            class="btn btn-primary">Go to Recommendation</a>
+        <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+
     {% else %}
         <p>No data found.</p>
     {% endif %}

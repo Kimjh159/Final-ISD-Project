@@ -3,10 +3,45 @@ from django.shortcuts import render
 from django.db.models import Avg
 from django.db.models import Max
 from HUFS.models import MockTest, Student, recommendclass
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
+from datetime import datetime
+from django.views.generic import TemplateView
+import requests
+
+class CustomLoginView(LoginView):
+    template_name = 'login.html'
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+def get_current_weather():
+    api_key = '2622e56dd1fb9c00db5b24599a7b7d4e'
+    city = 'Seoul'
+    url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
+    response = requests.get(url)
+    data = response.json()
+    if 'weather' in data:
+        current_weather = data['weather'][0]['main']
+        current_temperature = int(data['main']['temp'] - 273.15)
+    else:
+        current_weather = '날씨 정보를 가져오지 못했습니다'
+        current_temperature = None
+    return current_weather, current_temperature
+
+class HomeView(TemplateView):
+    template_name = 'home.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_date = datetime.now()
+        current_weather, current_temperature = get_current_weather()  # 외부 날씨 API를 사용하여 현재 날씨 정보 가져오기
+        context['current_date'] = current_date
+        context['current_weather'] = current_weather
+        context['current_temperature'] = current_temperature
+        return context
 
 
-def home(request):
-    return render(request, 'home.html')
 
 
 def student(request):
