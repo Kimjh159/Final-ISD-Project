@@ -5,70 +5,72 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Recommendation</h1>
-    <div id="recommendation-container">
-        <!-- Content will be dynamically updated here -->
-    </div>
+<h1>Recommendation</h1>
+<div id="recommendation-container">
+    <h2>Recommendation Table</h2>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th>Class</th>
+            <th>Subject</th>
+            <th>Price</th>
+            <th>Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if rec_kor_pro %}
+            <tr>
+                <td>Korean</td>
+                <td>{{ rec_kor_pro.0 }}</td>
+                <td>{{ rec_kor_cost.0 }}</td>
+                <td>{{ rec_kor_totalprice }}</td>
+            </tr>
+        {% endif %}
+        {% if rec_math_pro %}
+            <tr>
+                <td>Math</td>
+                <td>{{ rec_math_pro.0 }}</td>
+                <td>{{ rec_math_cost.0 }}</td>
+                <td>{{ rec_math_totalprice }}</td>
+            </tr>
+        {% endif %}
+        {% if rec_eng_pro %}
+            <tr>
+                <td>English</td>
+                <td>{{ rec_eng_pro.0 }}</td>
+                <td>{{ rec_eng_cost.0 }}</td>
+                <td>{{ rec_eng_totalprice }}</td>
+            </tr>
+        {% endif %}
+        {% if rec_ex_pro %}
+            <tr>
+                <td>Extraclass</td>
+                <td>{{ rec_ex_pro.0 }}</td>
+                <td>{{ rec_ex_cost.0 }}</td>
+                <td>{{ rec_ex_totalprice }}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        // Retrieve the URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const studentNumber = urlParams.get('student_number');
-        const date = urlParams.get('date');
-    </script>
-    {% if student_data_list %}
-        <h2>Search Results:</h2>
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th>Student Number</th>
-                <th>Mock Kor</th>
-                <th>Mock Math</th>
-                <th>Mock Eng</th>
-                <th>Mock Extraclass 1</th>
-                <th>Mock Extraclass 2</th>
-                <th>Date</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for student_data in student_data_list %}
-                <tr>
-                    <td>{{ student_data.student_stu_num }}</td>
-                    <td>{{ student_data.mock_kor }}</td>
-                    <td>{{ student_data.mock_math }}</td>
-                    <td>{{ student_data.mock_eng }}</td>
-                    <td>{{ student_data.mock_extraclass_1 }}</td>
-                    <td>{{ student_data.mock_extraclass_2 }}</td>
-                    <td>{{ student_data.date }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <h2>Differences between class average</h2>
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th>Mock Kor Difference</th>
-                <th>Mock Math Difference</th>
-                <th>Mock Eng Difference</th>
-                <th>Mock Extraclass 1 Difference</th>
-                <th>Mock Extraclass 2 Difference</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for diff in difference %}
-                <tr>
-                    <td>{{ diff.mock_kor|floatformat:1 }}</td>
-                    <td>{{ diff.mock_math|floatformat:1 }}</td>
-                    <td>{{ diff.mock_eng|floatformat:1 }}</td>
-                    <td>{{ diff.mock_extraclass_1|floatformat:1 }}</td>
-                    <td>{{ diff.mock_extraclass_2|floatformat:1 }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No data found.</p>
-    {% endif %}
+<script>
+    // Retrieve the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const studentNumber = urlParams.get('student_number');
+    const date = urlParams.get('date');
+</script>
+{% if student_data_list %}
+    <h2>Search Results: {{ name }}</h2>
+    <table class="table">
+        <!-- Existing student data table code -->
+    </table>
+    <h2>Differences between the class average</h2>
+    <table class="table">
+        <!-- Existing differences table code -->
+    </table>
+{% else %}
+    <p>No data found.</p>
+{% endif %}
 </body>
 </html>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from HUFS.models import Administrator, Class, Student, Timetable, MockTest, Visit, Teacher, Counseling, Room
+from HUFS.models import Administrator, Class, Student, Timetable, MockTest, Visit, Teacher, Counseling, Room,recommendclass
 
 admin.site.register(Administrator)
 admin.site.register(Class)
@@ -10,5 +10,5 @@ admin.site.register(Visit)
 admin.site.register(Teacher)
 admin.site.register(Counseling)
 admin.site.register(Room)
-
+admin.site.register(recommendclass)
 # Register your models here.

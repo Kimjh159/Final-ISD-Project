@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Administrator(models.Model):
     admin_num = models.PositiveIntegerField(db_column='ADMIN_NUM', primary_key=True)  # Field name made lowercase.
     admin_name = models.CharField(db_column='ADMIN_NAME', max_length=4)  # Field name made lowercase.
@@ -160,3 +161,19 @@ class Visit(models.Model):
     class Meta:
         managed = True
         db_table = 'visit'
+
+
+class recommendclass(models.Model):
+    rec_num = models.PositiveIntegerField(db_column='rec_num', primary_key=True)  # Field name made lowercase.
+    rec_classtype = models.CharField(db_column='rec_classtype', max_length=10)
+    rec_class = models.CharField(db_column='rec_class', max_length=20)# Field name made lowercase.
+    rec_pro = models.CharField(db_column='rec_pro', max_length=20)  # Field name made lowercase.
+    rec_price = models.PositiveIntegerField(db_column='price per hour')  # Field name made lowercase.
+    rec_weightpl = models.DecimalField(db_column='rec_weightpl', max_digits=5,
+                                       decimal_places=2)  # Field name made lowercase.
+    rec_weightmi = models.DecimalField(db_column='rec_weightmi', max_digits=5,
+                                       decimal_places=2)  # Field name made lowercase.
+
+    class Meta:
+        managed = True
+        db_table = 'recommendclass'

@@ -31,7 +31,7 @@
         </form>
     </div>
     {% if student_data_list %}
-        <h2>Search Results:</h2>
+        <h2>Search Results:{{ name }}</h2>
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -61,7 +61,7 @@
         <h2>Mock Tests Chart {{ student_data_list.0.student_stu_num.class_class_type }} </h2>
         <canvas id="mocktest-chart"></canvas>
 
-        <h2>Differences between class average</h2>
+        <h2>Differences between same class average</h2>
         <table class="table">
             <thead class="thead-light">
             <tr>
