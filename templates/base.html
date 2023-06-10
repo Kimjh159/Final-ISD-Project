@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HUFS TEST PREP CENTER</title>
     <style>
         body {
             margin: 0;
@@ -13,57 +13,89 @@
 
         header {
             background-color: rgb(29, 96, 190);
-            padding: 1vh;
+            padding: 10px;
+            border-bottom: 1px solid black;
         }
 
         header>div {
             text-align: center;
             color: white;
+            font-weight: bold;
+            font-size: 30px;
+            margin-bottom: 0px;
+        }
+
+        .container {
+          display: flex;
+          flex-direction: column;
+          margin-top: 50px; /* 네비게이션 메뉴 바의 높이에 맞춰 조정 */
         }
 
         nav {
-            background-color: rgb(29, 96, 190);
-            width: 200px;
-            position: fixed;
-            height: 100%;
+            background-color: ivory;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid black;
+            position: absolute;
+            top: 65px;
+            left: 0;
+            right: 0;
+            z-index: 1;
         }
 
+
         .menu {
-            margin-top: 10vh;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin-top: 12px;
+            list-style: none;
+            flex-grow: 1;
         }
 
         .menu li {
-            list-style: none;
+            flex-grow: 1;
+            text-align: center;
         }
 
         .menu li a {
-            height: 30px;
-            line-height: 50px;
-            /* display: block; */
-            padding: 0 10px;
-            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
             text-decoration: none;
-            color: white;
-
+            color: black;
+            font-weight: bold;
         }
+
+
+
+        .menu li a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
     </style>
 </head>
 
 <body>
     <header>
-        <div>HUFS TEST PREP CENTER</div>
+        <div>
+            <img src="logo.gif" height="30px">
+            HUFS TEST PREP CENTER
+        </div>
     </header>
-
+    <div class="container">
     <nav>
         <ul class="menu">
-            <li><a href="/home/">Home</a></li>
-            <li><a href="/student/">Student</a></li>
-            <li><a href="/mocktestanalyze/">Mock test analyze</a></li>
-            <li><a href="/teacher/">Teacher</a></li>
-            <li><a href="/timetable/">Timetable</a></li>
-            <li><a href="/counseling/">Counseling</a></li>
-            <li><a href="/visit/">Visit</a></li>
-            <li><a href="/leave/">Leave</a></li>
+            <li><a href="/home/"><span>Home</span></a></li>
+            <li><a href="/student/"><span>Student</span></a></li>
+            <li><a href="/mocktest/"><span>Mocktest Mgmt</span></a></li>
+            <li><a href="/mocktestanalyze/"><span>Mocktest Analyze</span></a></li>
+            <li><a href="/teacher/"><span>Teacher</span></a></li>
+            <li><a href="/timetable/"><span>Timetable</span></a></li>
+            <li><a href="/counseling/"><span>Counseling</span></a></li>
+            <li><a href="/visit/"><span>Visit</span></a></li>
         </ul>
     </nav>
 
@@ -74,7 +106,8 @@
     {% endblock content %}
 
     </main>
-
+    </div>
 </body>
 
 </html>
+

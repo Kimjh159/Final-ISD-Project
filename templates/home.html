@@ -1,8 +1,54 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>This is home.</p>
-    <p>현재 날짜: {{ current_date }}</p>
-<p>현재 날씨: {{ current_weather }}</p>
-    <p>현재 기온: {{ current_temperature }}</p>
+<head>
+<script>
+        // D-day를 계산하고 표시하는 함수
+        function calculateDday() {
+            // D-day까지의 남은 시간을 계산
+            var dDay = new Date("2023-11-16");  // D-day 날짜를 설정
+            var now = new Date();  // 현재 날짜를 가져옴
+            var timeDiff = dDay.getTime() - now.getTime();  // D-day까지의 밀리초 차이 계산
+            var daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));  // 일 단위로 변환
+
+            // 결과를 HTML 요소에 표시
+            var ddayElement = document.getElementById("dday");
+            if (daysDiff > 0) {
+                ddayElement.innerHTML = "D-" + daysDiff;
+            } else if (daysDiff === 0) {
+                ddayElement.innerHTML = "D-day!";
+            } else {
+                ddayElement.innerHTML = "D+" + Math.abs(daysDiff);
+            }
+        }
+    </script>
+</head>
+<body>
+<h1><center>Home</center></h1>
+<div class="container">
+<table class="table table-striped">
+    <tr>
+        <th>현재 날짜</th>
+        <th>현재 날씨</th>
+        <th>현재 기온</th>
+        <th>대학수학능력시험까지</th>
+    </tr>
+    <tr>
+        <td>{{ current_date }}</td>
+        <td>{{ current_weather }}</td>
+        <td>{{ current_temperature }}</td>
+        <td id="dday"></td>
+    </tr>
+</table>
+
+    <script>
+        // 페이지가 로드되면 D-day 계산 함수를 실행
+        calculateDday();
+    </script>
+
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</body>
+
 {% endblock %}

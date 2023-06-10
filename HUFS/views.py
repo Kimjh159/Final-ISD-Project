@@ -1,9 +1,10 @@
 # Create your views here.
 import requests
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db.models import Avg
 from django.db.models import Max
-from HUFS.models import MockTest, Student, recommendclass
+from HUFS.models import MockTest, Student, recommendclass, Timetable, Teacher, Counseling, Visit
+from HUFS.forms import StudentForm, TimetableForm, MockTestForm, TeacherForm, CounselingForm, VisitForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from datetime import datetime
@@ -40,17 +41,6 @@ class HomeView(TemplateView):
         context['current_weather'] = current_weather
         context['current_temperature'] = current_temperature
         return context
-
-
-
-
-def student(request):
-    return render(request, 'student.html')
-
-
-def timetable(request):
-    return render(request, 'timetable.html')
-
 
 def mocktest_search(request):
     student_number = request.GET.get('student_number')
@@ -254,18 +244,195 @@ def recommend(request):
 
     return render(request, 'recommend.html', context)
 
+def home(request):
+    return render(request, 'home.html')
 
+#student
+def student(request):
+    students = Student.objects.all()
+    return render(request, 'student.html', {'students' : students})
+def create_student(request):
+    form = StudentForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('student')
+
+    return render(request, 'student_form.html', {'form': form})
+
+def update_student(request, stu_num):
+    student = Student.objects.get(stu_num=stu_num)
+    form = StudentForm(request.POST or None, instance=student)
+
+    if form.is_valid():
+        form.save()
+        return redirect('student')
+
+    return render(request, 'student_form.html', {'form': form, 'student': student})
+def delete_student(request, stu_num):
+    student = Student.objects.get(stu_num=stu_num)
+
+    if request.method == 'POST':
+        student.delete()
+        return redirect('student')
+
+    return render(request, 'student_delete_confirm.html', {'student': student})
+
+
+
+
+
+#timetable
+def timetable(request):
+    timetables = Timetable.objects.all()
+    return render(request, 'timetable.html', {'timetables' : timetables})
+def create_timetable(request):
+    form = TimetableForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('timetable')
+
+    return render(request, 'timetable_form.html', {'form': form})
+def update_timetable(request, tita_num):
+    timetable = Timetable.objects.get(tita_num=tita_num)
+    form = TimetableForm(request.POST or None, instance=timetable)
+
+    if form.is_valid():
+        form.save()
+        return redirect('timetable')
+
+    return render(request, 'timetable_form.html', {'form': form, 'timetable': timetable})
+def delete_timetable(request, tita_num):
+    timetable = Timetable.objects.get(tita_num=tita_num)
+
+    if request.method == 'POST':
+        timetable.delete()
+        return redirect('timetable')
+
+    return render(request, 'timetable_delete_confirm.html', {'timetable': timetable})
+
+
+#mocktest
+def mocktest(request):
+    mocktests = MockTest.objects.all()
+    return render(request, 'mocktest.html', {'mocktests' : mocktests})
+def create_mocktest(request):
+    form = MockTestForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('mocktest')
+
+    return render(request, 'mocktest_form.html', {'form': form})
+def update_mocktest(request, mock_id):
+    mocktest = MockTest.objects.get(mock_id=mock_id)
+    form = MockTestForm(request.POST or None, instance=mocktest)
+
+    if form.is_valid():
+        form.save()
+        return redirect('mocktest')
+
+    return render(request, 'mocktest_form.html', {'form': form, 'mocktest': mocktest})
+def delete_mocktest(request, mock_id):
+    mocktest = MockTest.objects.get(mock_id=mock_id)
+
+    if request.method == 'POST':
+        mocktest.delete()
+        return redirect('mocktest')
+
+    return render(request, 'mocktest_delete_confirm.html', {'mocktest': mocktest})
+
+
+#teacher
 def teacher(request):
-    return render(request, 'teacher.html')
+    teachers = Teacher.objects.all()
+    return render(request, 'teacher.html', {'teachers' : teachers})
+def create_teacher(request):
+    form = TeacherForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect('teacher')
+
+    return render(request, 'teacher_form.html', {'form': form})
+def update_teacher(request, tea_num):
+    teacher = Teacher.objects.get(tea_num=tea_num)
+    form = TeacherForm(request.POST or None, instance=teacher)
+
+    if form.is_valid():
+        form.save()
+        return redirect('teacher')
+
+    return render(request, 'teacher_form.html', {'form': form, 'teacher': teacher})
+def delete_teacher(request, tea_num):
+    teacher = Teacher.objects.get(tea_num=tea_num)
+
+    if request.method == 'POST':
+        teacher.delete()
+        return redirect('teacher')
+
+    return render(request, 'teacher_delete_confirm.html', {'teacher': teacher})
 
 
+#counseling
 def counseling(request):
-    return render(request, 'counseling.html')
+    counselings = Counseling.objects.all()
+    return render(request, 'counseling.html', {'counselings' : counselings})
+def create_counseling(request):
+    form = CounselingForm(request.POST or None)
 
+    if form.is_valid():
+        form.save()
+        return redirect('counseling')
 
+    return render(request, 'counseling_form.html', {'form': form})
+def update_counseling(request, cou_num):
+    counseling = Counseling.objects.get(cou_num=cou_num)
+    form = CounselingForm(request.POST or None, instance=counseling)
+
+    if form.is_valid():
+        form.save()
+        return redirect('counseling')
+
+    return render(request, 'counseling_form.html', {'form': form, 'counseling': counseling})
+def delete_counseling(request, cou_num):
+    counseling = Counseling.objects.get(cou_num=cou_num)
+
+    if request.method == 'POST':
+        counseling.delete()
+        return redirect('counseling')
+
+    return render(request, 'counseling_delete_confirm.html', {'counseling': counseling})
+
+#visit
 def visit(request):
-    return render(request, 'visit.html')
+    visits = Visit.objects.all()
+    return render(request, 'visit.html', {'visits' : visits})
+def create_visit(request):
+    form = VisitForm(request.POST or None)
 
+    if form.is_valid():
+        form.save()
+        return redirect('visit')
 
-def leave(request):
-    return render(request, 'leave.html')
+    return render(request, 'visit_form.html', {'form': form})
+def update_visit(request, visit_num):
+    visit = Visit.objects.get(visit_num=visit_num)
+    form = VisitForm(request.POST or None, instance=visit)
+
+    if form.is_valid():
+        form.save()
+        return redirect('visit')
+
+    return render(request, 'visit_form.html', {'form': form, 'visit': visit})
+def delete_visit(request, visit_num):
+    visit = Visit.objects.get(visit_num=visit_num)
+
+    if request.method == 'POST':
+        visit.delete()
+        return redirect('visit')
+
+    return render(request, 'visit_delete_confirm.html', {'visit': visit})
+
+#leave

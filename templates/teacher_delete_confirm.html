@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+<form method="post">
+  {% csrf_token %}
+  <h2> Are you sure to remove {{ teacher.tea_name }}</h2>
+  <button class="btn btn-danger" type="submit">Delete</button>
+  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+</form>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</body>
+</html>
+
+{% endblock content %}

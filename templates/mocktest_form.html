@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+<h1> New / Update Mock Test </h1>
+<form method="POST">
+  {% csrf_token %}
+   <label>MOCK_ID</label> {{ form.mock_id}} </br>
+   <label>MOCK_KOR</label> {{ form.mock_kor}} </br>
+   <label>MOCK_MATH</label> {{ form.mock_math }} </br>
+   <label>MOCK_ENG</label> {{ form.mock_eng }} </br>
+   <label>MOCK_EXTRACLASS_1</label> {{ form.mock_extraclass_1 }} </br>
+   <label>MOCK_EXTRACLASS_2</label> {{ form.mock_extraclass_2 }} </br>
+   <label>DATE</label> {{ form.date }} </br>
+    {% if form.date.errors %}
+       <p class="text-danger">{{ form.date.errors }}</p>
+   {% endif %}
+   <label>STUDENT_STU_NUM</label> {{ form.student_stu_num }} </br>
+  <button class="btn btn-default" type="submit">Save</button>
+  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+</form>
+
+    {% if mocktest %}
+      <a class="btn btn-danger" href="{%url 'delete_mocktest' mocktest.mock_id %}">Delete</a>
+    {%endif%}
+
+</div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</body>
+</html>
+
+{% endblock content %}
