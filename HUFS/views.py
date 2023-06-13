@@ -121,9 +121,6 @@ def mocktestanalyze(request):
     return render(request, 'mocktestanalyze.html', context)
 
 
-from decimal import Decimal
-
-
 def recommend(request):
     student_number = request.GET.get('student_number')
     date = request.GET.get('date')

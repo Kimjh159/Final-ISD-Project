@@ -1,32 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<html>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-<h1> New / Update Timetable </h1>
-<form method="POST">
-  {% csrf_token %}
-   <label>TITA_NUM</label> {{ form.tita_num}} </br>
-   <label>TITA_DAY</label> {{ form.tita_day}} </br>
-   <label>TITA_1C</label> {{ form.tita_1c }} </br>
-   <label>TITA_2C</label> {{ form.tita_2c }} </br>
-   <label>TITA_3C</label> {{ form.tita_3c }} </br>
-   <label>TITA_4C</label> {{ form.tita_4c }} </br>
-   <label>CLASS_CLASS_TYPE</label> {{ form.class_class_type }} </br>
-  <button class="btn btn-default" type="submit">Save</button>
-  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
-</form>
+    <html>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> New / Update Timetable </h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label>TITA_NUM</label> {{ form.tita_num }} </br>
+                    <label>TITA_DAY</label> {{ form.tita_day }} </br>
+                    <label>TITA_1C</label> {{ form.tita_1c }} </br>
+                    <label>TITA_2C</label> {{ form.tita_2c }} </br>
+                    <label>TITA_3C</label> {{ form.tita_3c }} </br>
+                    <label>TITA_4C</label> {{ form.tita_4c }} </br>
+                    <label>CLASS_CLASS_TYPE</label> {{ form.class_class_type }} </br>
+                    <button class="btn btn-default" type="submit">Save</button>
+                    <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+                </form>
 
-    {% if timetable %}
-      <a class="btn btn-danger" href="{%url 'delete_timetable' timetable.tita_num %}">Delete</a>
-    {%endif%}
+                {% if timetable %}
+                    <a class="btn btn-danger" href="{% url 'delete_timetable' timetable.tita_num %}">Delete</a>
+                {% endif %}
 
-</div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</body>
-</html>
+            </div>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        </div>
+    </div>
+    </body>
+    </html>
 
 {% endblock content %}

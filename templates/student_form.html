@@ -1,46 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-<html>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-<h1> New / Update Student </h1>
-<form method="POST">
-  {% csrf_token %}
-   <label>STU_NUM</label> {{ form.stu_num}} </br>
-   <label>STU_NAME</label> {{ form.stu_name}} </br>
-   <label>STU_AGE</label> {{ form.stu_age }} </br>
-   <label>STU_SEX</label> {{ form.stu_sex }} </br>
-   <label>STU_BIRTH</label> {{ form.stu_birth }} </br>
-    {% if form.stu_birth.errors %}
-       <p class="text-danger">{{ form.stu_birth.errors }}</p>
-   {% endif %}
-   <label>STU_CURRICULUM</label> {{ form.stu_curriculum }} </br>
-   <label>STU_EXTRACLASS_1</label> {{ form.stu_extraclass_1 }} </br>
-   <label>STU_EXTRACLASS_2</label> {{ form.stu_extraclass_2 }} </br>
-   <label>STU_FORMEREXAM</label> {{ form.stu_formerexam }} </br>
-   <label>STU_LEAVE_DATE</label> {{ form.stu_leave_date }} </br>
-    {% if form.stu_leave_date.errors %}
-       <p class="text-danger">{{ form.stu_leave_date.errors }}</p>
-   {% endif %}
-   <label>STU_LEAVE_REASON</label> {{ form.stu_leave_reason }} </br>
-   <label>ROOM_ROOM_NUM</label> {{ form.room_room_num }} </br>
-   <label>CLASS_CLASS_TYPE</label> {{ form.class_class_type }} </br>
-  <button class="btn btn-default" type="submit">Save</button>
-  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
-</form>
+    <html>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> New / Update Student </h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label>STU_NUM</label> {{ form.stu_num }} </br>
+                    <label>STU_NAME</label> {{ form.stu_name }} </br>
+                    <label>STU_AGE</label> {{ form.stu_age }} </br>
+                    <label>STU_SEX</label> {{ form.stu_sex }} </br>
+                    <label>STU_BIRTH</label> {{ form.stu_birth }} </br>
+                    {% if form.stu_birth.errors %}
+                        <p class="text-danger">{{ form.stu_birth.errors }}</p>
+                    {% endif %}
+                    <label>STU_CURRICULUM</label> {{ form.stu_curriculum }} </br>
+                    <label>STU_EXTRACLASS_1</label> {{ form.stu_extraclass_1 }} </br>
+                    <label>STU_EXTRACLASS_2</label> {{ form.stu_extraclass_2 }} </br>
+                    <label>STU_FORMEREXAM</label> {{ form.stu_formerexam }} </br>
+                    <label>STU_LEAVE_DATE</label> {{ form.stu_leave_date }} </br>
+                    {% if form.stu_leave_date.errors %}
+                        <p class="text-danger">{{ form.stu_leave_date.errors }}</p>
+                    {% endif %}
+                    <label>STU_LEAVE_REASON</label> {{ form.stu_leave_reason }} </br>
+                    <label>ROOM_ROOM_NUM</label> {{ form.room_room_num }} </br>
+                    <label>CLASS_CLASS_TYPE</label> {{ form.class_class_type }} </br>
+                    <button class="btn btn-default" type="submit">Save</button>
+                    <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+                </form>
 
-    {% if student %}
-      <a class="btn btn-danger" href="{%url 'delete_student' student.stu_num %}">Delete</a>
-    {%endif%}
+                {% if student %}
+                    <a class="btn btn-danger" href="{% url 'delete_student' student.stu_num %}">Delete</a>
+                {% endif %}
 
-</div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
-</body>
-</html>
+            </div>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        </div>
+    </div>
+    </body>
+    </html>
 
 {% endblock content %}

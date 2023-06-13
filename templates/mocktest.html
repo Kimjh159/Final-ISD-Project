@@ -1,93 +1,89 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1><center>MockTest Management</center></h1>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-<input type="text" id="searchInput" placeholder="검색어를 입력하세요" oninput="search()">
-        <a class="btn btn-info pull-right" href = "{%url 'add_mocktest' %}"> New MockTest </a>
-<table class="table table-striped">
-  <tr>
-   <th>MOCK_ID </th>
-   <th>MOCK_KOR</th>
-   <th>MOCK_MATH</th>
-   <th>MOCK_ENG</th>
-   <th>MOCK_EXTRACLASS_1</th>
-   <th>MOCK_EXTRACLASS_2</th>
-   <th>DATE</th>
-   <th>STUDENT_STU_NUM</th>
-    <th>UPDATE</th>
-  </tr>
-    <tbody id="mocktestTablebody">
-  <tr>
-  {% for mocktest in mocktests%}
-   <td> {{ mocktest.mock_id }} </td>
-   <td> {{ mocktest.mock_kor }}</td>
-   <td> {{ mocktest.mock_math }}</td>
-   <td> {{ mocktest.mock_eng }}</td>
-   <td> {{ mocktest.mock_extraclass_1 }}</td>
-   <td> {{ mocktest.mock_extraclass_2 }}</td>
-   <td> {{ mocktest.date }}</td>
-   <td> {{ mocktest.student_stu_num }}</td>
-      <td> <a class="btn btn-info" href ="{%url 'update_mocktest' mocktest.mock_id %}" >Update  </a> <td>
+    <h1>
+        <center>MockTest Management</center>
+    </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="text" id="searchInput" placeholder="검색어를 입력하세요" oninput="search()">
+                <a class="btn btn-info pull-right" href="{% url 'add_mocktest' %}"> New MockTest </a>
+                <table class="table table-striped">
+                    <tr>
+                        <th>MOCK_ID</th>
+                        <th>MOCK_KOR</th>
+                        <th>MOCK_MATH</th>
+                        <th>MOCK_ENG</th>
+                        <th>MOCK_EXTRACLASS_1</th>
+                        <th>MOCK_EXTRACLASS_2</th>
+                        <th>DATE</th>
+                        <th>STUDENT_STU_NUM</th>
+                        <th>UPDATE</th>
+                    </tr>
+                    <tbody id="mocktestTablebody">
+                    <tr>
+                        {% for mocktest in mocktests %}
+                            <td> {{ mocktest.mock_id }} </td>
+                            <td> {{ mocktest.mock_kor }}</td>
+                            <td> {{ mocktest.mock_math }}</td>
+                            <td> {{ mocktest.mock_eng }}</td>
+                            <td> {{ mocktest.mock_extraclass_1 }}</td>
+                            <td> {{ mocktest.mock_extraclass_2 }}</td>
+                            <td> {{ mocktest.date }}</td>
+                            <td> {{ mocktest.student_stu_num }}</td>
+                            <td><a class="btn btn-info" href="{% url 'update_mocktest' mocktest.mock_id %}">Update </a>
+                            <td>
 
-    </tr>
-  {%endfor%}
-</table>
+                            </tr>
+                        {% endfor %}
+                </table>
 
-<a class="btn btn-info pull-right" href = "{%url 'add_mocktest' %}"> New MockTest </a>
+                <a class="btn btn-info pull-right" href="{% url 'add_mocktest' %}"> New MockTest </a>
 
-             <!-- 페이징 버튼 영역 추가 -->
-        <div id="pagination">
-          <button onclick="previousPage()">Previous</button>
-          <button onclick="nextPage()">Next</button>
+                <div id="pagination">
+                    <button onclick="previousPage()">Previous</button>
+                    <button onclick="nextPage()">Next</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <script>
-    var currentPage = 0; // 현재 페이지
-    var itemsPerPage = 15; // 페이지당 항목 수
-    var rows = document.getElementById('mocktestTablebody').rows; // 항목들을 감싸는 테이블의 행들
+    <script>
+        var currentPage = 0;
+        var itemsPerPage = 15;
+        var rows = document.getElementById('mocktestTablebody').rows;
 
-    // 페이지를 업데이트하고 해당 페이지의 항목들을 보여주는 함수
-    function updatePage() {
-      var startIndex = currentPage * itemsPerPage;
-      var endIndex = (currentPage + 1) * itemsPerPage;
+        function updatePage() {
+            var startIndex = currentPage * itemsPerPage;
+            var endIndex = (currentPage + 1) * itemsPerPage;
 
-      for (var i = 0; i < rows.length; i++) {
-        if (i >= startIndex && i < endIndex) {
-          rows[i].style.display = 'table-row';
-        } else {
-          rows[i].style.display = 'none';
+            for (var i = 0; i < rows.length; i++) {
+                if (i >= startIndex && i < endIndex) {
+                    rows[i].style.display = 'table-row';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
         }
-      }
-    }
 
-    // 이전 페이지로 이동하는 함수
-    function previousPage() {
-      if (currentPage > 0) {
-        currentPage--;
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                updatePage();
+            }
+        }
+
+        function nextPage() {
+            var maxPage = Math.ceil(rows.length / itemsPerPage) - 1;
+            if (currentPage < maxPage) {
+                currentPage++;
+                updatePage();
+            }
+        }
+
         updatePage();
-      }
-    }
-
-    // 다음 페이지로 이동하는 함수
-    function nextPage() {
-      var maxPage = Math.ceil(rows.length / itemsPerPage) - 1;
-      if (currentPage < maxPage) {
-        currentPage++;
-        updatePage();
-      }
-    }
-
-    // 검색 기능과 관련된 코드는 그대로 유지됩니다.
-
-    // 페이지 로드 시 첫 번째 페이지로 설정
-    updatePage();
-  </script>
+    </script>
 
     <script>
         function search() {
@@ -107,6 +103,6 @@
         }
     </script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 {% endblock content %}

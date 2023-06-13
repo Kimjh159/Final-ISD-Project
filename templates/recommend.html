@@ -1,72 +1,72 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Recommendation</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</head>
-<body>
-<div id="recommendation-container">
-    {% if student_data_list %}
-        <h2>Search Results: {{ name }}</h2>
-    {% else %}
-        <p>No data found.</p>
-    {% endif %}
-    <h2>Recommend Program</h2>
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th>Class</th>
-            <th>Subject</th>
-            <th>Price</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% if rec_kor_pro %}
-            <tr>
-                <td>Korean</td>
-                <td>{{ rec_kor_pro.0 }}</td>
-                <td>{{ rec_kor_totalprice|floatformat:0 }} ₩</td>
-            </tr>
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Recommendation</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </head>
+    <body>
+    <div id="recommendation-container">
+        {% if student_data_list %}
+            <h2>Search Results: {{ name }}</h2>
+        {% else %}
+            <p>No data found.</p>
         {% endif %}
-        {% if rec_math_pro %}
+        <h2>Recommend Program</h2>
+        <table class="table">
+            <thead class="thead-light">
             <tr>
-                <td>Math</td>
-                <td>{{ rec_math_pro.0 }}</td>
-                <td>{{ rec_math_totalprice|floatformat:0 }} ₩</td>
+                <th>Class</th>
+                <th>Subject</th>
+                <th>Price</th>
             </tr>
-        {% endif %}
-        {% if rec_eng_pro %}
-            <tr>
-                <td>English</td>
-                <td>{{ rec_eng_pro.0 }}</td>
-                <td>{{ rec_eng_totalprice|floatformat:0 }} ₩</td>
-            </tr>
-        {% endif %}
-        {% if rec_ex_pro %}
-            <tr>
-                <td>Extraclass</td>
-                <td>{{ rec_ex_pro.0 }}</td>
-                <td>{{ rec_ex_totalprice|floatformat:0 }} ₩</td>
-            </tr>
-        {% endif %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% if rec_kor_pro %}
+                <tr>
+                    <td>Korean</td>
+                    <td>{{ rec_kor_pro.0 }}</td>
+                    <td>{{ rec_kor_totalprice|floatformat:0 }} ₩</td>
+                </tr>
+            {% endif %}
+            {% if rec_math_pro %}
+                <tr>
+                    <td>Math</td>
+                    <td>{{ rec_math_pro.0 }}</td>
+                    <td>{{ rec_math_totalprice|floatformat:0 }} ₩</td>
+                </tr>
+            {% endif %}
+            {% if rec_eng_pro %}
+                <tr>
+                    <td>English</td>
+                    <td>{{ rec_eng_pro.0 }}</td>
+                    <td>{{ rec_eng_totalprice|floatformat:0 }} ₩</td>
+                </tr>
+            {% endif %}
+            {% if rec_ex_pro %}
+                <tr>
+                    <td>Extraclass</td>
+                    <td>{{ rec_ex_pro.0 }}</td>
+                    <td>{{ rec_ex_totalprice|floatformat:0 }} ₩</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
 
-    <h2>Total Price</h2>
-    <p>{{ rec_totalprice|floatformat:0 }} ₩</p>
-<a href="{% url 'home' %}" class="btn btn-primary">Home</a>
-</div>
+        <h2>Total Price</h2>
+        <p>{{ rec_totalprice|floatformat:0 }} ₩</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
+    </div>
 
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const studentNumber = urlParams.get('student_number');
-    const date = urlParams.get('date');
-</script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentNumber = urlParams.get('student_number');
+        const date = urlParams.get('date');
+    </script>
 
-</body>
-</html>
+    </body>
+    </html>
 
 {% endblock content %}

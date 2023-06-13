@@ -1,32 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
-<html>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-<h1> New / Update Counseling </h1>
-<form method="POST">
-  {% csrf_token %}
-   <label>COU_NUM</label> {{ form.cou_num}} </br>
-   <label>COU_DATE</label> {{ form.cou_date}} </br>
-    {% if form.cou_date.errors %}
-       <p class="text-danger">{{ form.cou_date.errors }}</p>
-   {% endif %}
-   <label>ADMINISTRATOR_ADMIN_NUM</label> {{ form.administrator_admin_num }} </br>
-   <label>STUDENT_STU_NUM</label> {{ form.student_stu_num }} </br>
-  <button class="btn btn-default" type="submit">Save</button>
-  <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
-</form>
+    <html>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1> New / Update Counseling </h1>
+                <form method="POST">
+                    {% csrf_token %}
+                    <label>COU_NUM</label> {{ form.cou_num }} </br>
+                    <label>COU_DATE</label> {{ form.cou_date }} </br>
+                    {% if form.cou_date.errors %}
+                        <p class="text-danger">{{ form.cou_date.errors }}</p>
+                    {% endif %}
+                    <label>ADMINISTRATOR_ADMIN_NUM</label> {{ form.administrator_admin_num }} </br>
+                    <label>STUDENT_STU_NUM</label> {{ form.student_stu_num }} </br>
+                    <button class="btn btn-default" type="submit">Save</button>
+                    <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
+                </form>
 
-    {% if counseling %}
-      <a class="btn btn-danger" href="{%url 'delete_counseling' counseling.cou_num %}">Delete</a>
-    {%endif%}
+                {% if counseling %}
+                    <a class="btn btn-danger" href="{% url 'delete_counseling' counseling.cou_num %}">Delete</a>
+                {% endif %}
 
-</div>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-</body>
-</html>
+            </div>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    </div>
+    </div>
+    </body>
+    </html>
 
 {% endblock content %}
