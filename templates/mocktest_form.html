@@ -10,6 +10,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label>MOCK_ID</label> {{ form.mock_id }} </br>
+                    {% if form.mock_id.errors %}
+                        <p class="text-danger">{{ form.mock_id.errors }}</p>
+                    {% endif %}
                     <label>MOCK_KOR</label> {{ form.mock_kor }} </br>
                     <label>MOCK_MATH</label> {{ form.mock_math }} </br>
                     <label>MOCK_ENG</label> {{ form.mock_eng }} </br>

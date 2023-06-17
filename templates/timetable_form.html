@@ -10,6 +10,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label>TITA_NUM</label> {{ form.tita_num }} </br>
+                    {% if form.tita_num.errors %}
+                        <p class="text-danger">{{ form.tita_num.errors }}</p>
+                    {% endif %}
                     <label>TITA_DAY</label> {{ form.tita_day }} </br>
                     <label>TITA_1C</label> {{ form.tita_1c }} </br>
                     <label>TITA_2C</label> {{ form.tita_2c }} </br>

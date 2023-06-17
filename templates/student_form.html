@@ -10,6 +10,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label>STU_NUM</label> {{ form.stu_num }} </br>
+                    {% if form.stu_num.errors %}
+                        <p class="text-danger">{{ form.stu_num.errors }}</p>
+                    {% endif %}
                     <label>STU_NAME</label> {{ form.stu_name }} </br>
                     <label>STU_AGE</label> {{ form.stu_age }} </br>
                     <label>STU_SEX</label> {{ form.stu_sex }} </br>

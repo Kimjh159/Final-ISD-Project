@@ -10,11 +10,14 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label>COU_NUM</label> {{ form.cou_num }} </br>
+                    {% if form.cou_num.errors %}
+                        <p class="text-danger">{{ form.cou_num.errors }}</p>
+                    {% endif %}
                     <label>COU_DATE</label> {{ form.cou_date }} </br>
                     {% if form.cou_date.errors %}
                         <p class="text-danger">{{ form.cou_date.errors }}</p>
                     {% endif %}
-                    <label>ADMINISTRATOR_ADMIN_NUM</label> {{ form.administrator_admin_num }} </br>
+                    <label>ADMINISTRATOR_ADMIN_NAME</label> {{ form.administrator_admin_num }} </br>
                     <label>STUDENT_STU_NUM</label> {{ form.student_stu_num }} </br>
                     <button class="btn btn-default" type="submit">Save</button>
                     <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>

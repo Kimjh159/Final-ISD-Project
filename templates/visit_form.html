@@ -10,6 +10,9 @@
                 <form method="POST">
                     {% csrf_token %}
                     <label>VISIT_NUM</label> {{ form.visit_num }} </br>
+                    {% if form.visit_num.errors %}
+                        <p class="text-danger">{{ form.visit_num.errors }}</p>
+                    {% endif %}
                     <label>VISIT_DATE</label> {{ form.visit_date }} </br>
                     {% if form.visit_date.errors %}
                         <p class="text-danger">{{ form.visit_date.errors }}</p>
@@ -17,7 +20,7 @@
                     <label>VISIT_VISITOR</label> {{ form.visit_visitor }} </br>
                     <label>VISIT_LEAVEHOUR</label> {{ form.visit_leavehour }} </br>
                     <label>STUDENT_STU_NUM</label> {{ form.student_stu_num }} </br>
-                    <label>ADMINISTRATOR_ADMIN_NUM</label> {{ form.administrator_admin_num }} </br>
+                    <label>ADMINISTRATOR_ADMIN_NAME</label> {{ form.administrator_admin_num }} </br>
                     <button class="btn btn-default" type="submit">Save</button>
                     <button onclick="window.history.back();" class="btn btn-default" type="button">Cancel</button>
                 </form>

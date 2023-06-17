@@ -249,13 +249,26 @@ def student(request):
     students = Student.objects.all()
     return render(request, 'student.html', {'students' : students})
 def create_student(request):
-    form = StudentForm(request.POST or None)
+    max_stu_num = Student.objects.aggregate(Max('stu_num'))['stu_num__max']
+    next_stu_num = max_stu_num + 1 if max_stu_num is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('student')
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+
+        if form.is_valid():
+            stu_num = form.cleaned_data['stu_num']
+            existing_student = Student.objects.filter(stu_num=stu_num).exists()
+
+            if existing_student:
+                form.add_error('stu_num', '이미 존재하는 STU_NUM입니다.')
+            else:
+                form.save()
+                return redirect('student')
+    else:
+        form = StudentForm(initial={'stu_num': next_stu_num})
 
     return render(request, 'student_form.html', {'form': form})
+
 
 def update_student(request, stu_num):
     student = Student.objects.get(stu_num=stu_num)
@@ -284,13 +297,26 @@ def timetable(request):
     timetables = Timetable.objects.all()
     return render(request, 'timetable.html', {'timetables' : timetables})
 def create_timetable(request):
-    form = TimetableForm(request.POST or None)
+    max_tita_num = Timetable.objects.aggregate(Max('tita_num'))['tita_num__max']
+    next_tita_num = max_tita_num + 1 if max_tita_num is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('timetable')
+    if request.method == 'POST':
+        form = TimetableForm(request.POST)
+
+        if form.is_valid():
+            tita_num = form.cleaned_data['tita_num']
+            existing_timetable = Timetable.objects.filter(tita_num=tita_num).exists()
+
+            if existing_timetable:
+                form.add_error('tita_num', '이미 존재하는 TITA_NUM입니다.')
+            else:
+                form.save()
+                return redirect('timetable')
+    else:
+        form = TimetableForm(initial={'tita_num': next_tita_num})
 
     return render(request, 'timetable_form.html', {'form': form})
+
 def update_timetable(request, tita_num):
     timetable = Timetable.objects.get(tita_num=tita_num)
     form = TimetableForm(request.POST or None, instance=timetable)
@@ -315,13 +341,26 @@ def mocktest(request):
     mocktests = MockTest.objects.all()
     return render(request, 'mocktest.html', {'mocktests' : mocktests})
 def create_mocktest(request):
-    form = MockTestForm(request.POST or None)
+    max_mock_id = MockTest.objects.aggregate(Max('mock_id'))['mock_id__max']
+    next_mock_id = max_mock_id + 1 if max_mock_id is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('mocktest')
+    if request.method == 'POST':
+        form = MockTestForm(request.POST)
+
+        if form.is_valid():
+            mock_id = form.cleaned_data['mock_id']
+            existing_mocktest = MockTest.objects.filter(mock_id=mock_id).exists()
+
+            if existing_mocktest:
+                form.add_error('mock_id', '이미 존재하는 MOCK_ID입니다.')
+            else:
+                form.save()
+                return redirect('mocktest')
+    else:
+        form = MockTestForm(initial={'mock_id': next_mock_id})
 
     return render(request, 'mocktest_form.html', {'form': form})
+
 def update_mocktest(request, mock_id):
     mocktest = MockTest.objects.get(mock_id=mock_id)
     form = MockTestForm(request.POST or None, instance=mocktest)
@@ -346,11 +385,23 @@ def teacher(request):
     teachers = Teacher.objects.all()
     return render(request, 'teacher.html', {'teachers' : teachers})
 def create_teacher(request):
-    form = TeacherForm(request.POST or None)
+    max_tea_num = Teacher.objects.aggregate(Max('tea_num'))['tea_num__max']
+    next_tea_num = max_tea_num + 1 if max_tea_num is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('teacher')
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+
+        if form.is_valid():
+            tea_num = form.cleaned_data['tea_num']
+            existing_teacher = Teacher.objects.filter(tea_num=tea_num).exists()
+
+            if existing_teacher:
+                form.add_error('tea_num', '이미 존재하는 TEA_NUM입니다.')
+            else:
+                form.save()
+                return redirect('teacher')
+    else:
+        form = TeacherForm(initial={'tea_num': next_tea_num})
 
     return render(request, 'teacher_form.html', {'form': form})
 def update_teacher(request, tea_num):
@@ -377,11 +428,23 @@ def counseling(request):
     counselings = Counseling.objects.all()
     return render(request, 'counseling.html', {'counselings' : counselings})
 def create_counseling(request):
-    form = CounselingForm(request.POST or None)
+    max_cou_num = Counseling.objects.aggregate(Max('cou_num'))['cou_num__max']
+    next_cou_num = max_cou_num + 1 if max_cou_num is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('counseling')
+    if request.method == 'POST':
+        form = CounselingForm(request.POST)
+
+        if form.is_valid():
+            cou_num = form.cleaned_data['cou_num']
+            existing_counseling = Counseling.objects.filter(cou_num=cou_num).exists()
+
+            if existing_counseling:
+                form.add_error('cou_num', '이미 존재하는 COU_NUM입니다.')
+            else:
+                form.save()
+                return redirect('counseling')
+    else:
+        form = CounselingForm(initial={'cou_num': next_cou_num})
 
     return render(request, 'counseling_form.html', {'form': form})
 def update_counseling(request, cou_num):
@@ -407,11 +470,23 @@ def visit(request):
     visits = Visit.objects.all()
     return render(request, 'visit.html', {'visits' : visits})
 def create_visit(request):
-    form = VisitForm(request.POST or None)
+    max_visit_num = Visit.objects.aggregate(Max('visit_num'))['visit_num__max']
+    next_visit_num = max_visit_num + 1 if max_visit_num is not None else 1
 
-    if form.is_valid():
-        form.save()
-        return redirect('visit')
+    if request.method == 'POST':
+        form = VisitForm(request.POST)
+
+        if form.is_valid():
+            visit_num = form.cleaned_data['visit_num']
+            existing_visit = Visit.objects.filter(visit_num=visit_num).exists()
+
+            if existing_visit:
+                form.add_error('visit_num', '이미 존재하는 VISIT_NUM입니다.')
+            else:
+                form.save()
+                return redirect('visit')
+    else:
+        form = VisitForm(initial={'visit_num': next_visit_num})
 
     return render(request, 'visit_form.html', {'form': form})
 def update_visit(request, visit_num):
